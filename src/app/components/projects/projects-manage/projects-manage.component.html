@@ -1,0 +1,62 @@
+<div class="page-container">
+  <div class="card" style="padding:20px">
+    <div class="card-heading">
+      <h4 class="card-title" style="font-size:18px">
+        {{operationText}} Project
+        <div class="card-action" style="float:right;font-size: 15px !important; "><a routerLink="/projects">Projects</a></div>
+      </h4>
+    </div>
+    <div class="card-body">
+      <form name="projectForm" [formGroup]="projectForm" (ngSubmit)="projectCreate()" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" formControlName="name" [value]="project.name" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea  formControlName="description" class="form-control" [value]="project.description"> {{project.description}}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Start Date</label>
+                <input  formControlName="startDate" [value]="project.startDate" value="{{project.startDate | date:'yyyy-MM-dd'}}" placeholder="Start date (YYYY-MM-DD) i.e. 2019-02-28" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>End Date</label>
+                <input formControlName="endDate" [value]="project.endDate" value="{{project.endDate | date:'yyyy-MM-dd'}}" placeholder="End date (YYYY-MM-DD) i.e. 2019-02-28" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Start Date</label>
+                <select formControlName="status" [value]="project.status" class="form-control">
+                  <option *ngFor="let status of statues" [value]="status.option">{{status.value}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>&nbsp;
+            <a class="btn btn-danger" routerLink="/projects">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
