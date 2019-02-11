@@ -19,7 +19,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Description</label>
-                <textarea  formControlName="description" class="form-control" [value]="project.description"> {{project.description}}</textarea>
+                <textarea formControlName="description" class="form-control" [value]="project.description"> {{project.description}}</textarea>
               </div>
             </div>
           </div>
@@ -29,11 +29,13 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Start Date</label>
-                <input  formControlName="startDate" [value]="project.startDate" value="{{project.startDate | date:'yyyy-MM-dd'}}" placeholder="Start date (YYYY-MM-DD) i.e. 2019-02-28" class="form-control">
+                <input formControlName="startDate" [value]="project.startDate" value="{{project.startDate | date:'yyyy-MM-dd'}}"
+                  placeholder="Start date (YYYY-MM-DD) i.e. 2019-02-28" class="form-control">
               </div>
               <div class="form-group">
                 <label>End Date</label>
-                <input formControlName="endDate" [value]="project.endDate" value="{{project.endDate | date:'yyyy-MM-dd'}}" placeholder="End date (YYYY-MM-DD) i.e. 2019-02-28" class="form-control">
+                <input formControlName="endDate" [value]="project.endDate" value="{{project.endDate | date:'yyyy-MM-dd'}}"
+                  placeholder="End date (YYYY-MM-DD) i.e. 2019-02-28" class="form-control">
               </div>
             </div>
           </div>
@@ -47,6 +49,36 @@
                   <option *ngFor="let status of statues" [value]="status.option">{{status.value}}</option>
                 </select>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          
+          <div class="col-md-12">
+              <button type="button" (click)="addUser()" class="btn btn-warning pull-right">Add user</button>
+            <div formArrayName="users" *ngFor="let item of projectForm.get('users').controls; let i = index;">
+              <div [formGroupName]="i">
+                <table>
+                  <tr>
+                    <td class="span4">
+                      <input formControlName="name" class="form-control" placeholder="User name">
+                      <!-- <input type="hidden" formControlName="_id" class="form-control"> -->
+                    </td>
+                    <td class="span4">
+                      <!-- <input formControlName="type" class="form-control" placeholder="User type"> -->
+                      <select formControlName="type" class="form-control">
+                        <option value="">- Select Option -</option>
+                        <option value="{{type.option}}" [value]="type.option" *ngFor="let type of userTypes; let ii = index">{{type.value}}</option>
+                      </select>
+                    </td>
+                    <td class="span4">
+                      <input formControlName="email" class="form-control" placeholder="Email">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+
             </div>
           </div>
         </div>
