@@ -75,7 +75,7 @@ export class ProjectsManageComponent implements OnInit {
       startDate: [this.project.startDate, Validators.required],
       endDate: [this.project.endDate, Validators.required],
       status: [this.project.status, Validators.required],
-      users: this.formBuilder.array(oldUser)
+      // users: this.formBuilder.array(oldUser)
       // users: this.formBuilder.array([this.createUser()])
     });
   }
@@ -109,9 +109,9 @@ export class ProjectsManageComponent implements OnInit {
     // return false;
     if (!id) {
       let data = this.projectForm.value;
-      // data.users = JSON.parse(
-      //   '[{"name":"name4","type":2,"email":"email@email.com"},{"name":"name4","type":1,"email":"email144@email.com"}]'
-      // );
+      data.users = JSON.parse(
+        '[{"name":"name4","type":2,"email":"email@email.com"},{"name":"name4","type":1,"email":"email144@email.com"}]'
+      );
       this.httpRequest
         .doPostWithoutHeader("projects", this.projectForm.value)
         .subscribe(
