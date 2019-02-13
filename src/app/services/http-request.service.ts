@@ -8,6 +8,7 @@ import {
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -15,13 +16,13 @@ import { map } from "rxjs/operators";
 export class HttpRequestService {
   private postHeaders: any;
   private getHeaders: any;
-  private APIEndPoint = "http://localhost:3000/";
+  private APIEndPoint = environment.baseUrl;
   constructor(private http: HttpClient) {
     this.setHeaders();
     if (window.location.hostname === "localhost") {
-      this.APIEndPoint = "http://localhost:3000/";
+      //this.APIEndPoint = "http://localhost:3000/";
     } else {
-      this.APIEndPoint = "http://localhost:3000/";
+      //this.APIEndPoint = "http://localhost:3000/";
     }
   }
   setHeaders() {
