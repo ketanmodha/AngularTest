@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   loginUser()
   {
-  	 this.validator();
+  	 this.validator();	
   }
 
   validator()
