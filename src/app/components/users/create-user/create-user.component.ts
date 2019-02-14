@@ -66,10 +66,10 @@ export class CreateUserComponent implements OnInit {
     let id = this.route.snapshot.params["id"];
     if (!id) {
       console.log(id);
-      let data = this.userForm.value;
-       data.users = JSON.parse(
-        '[{"first_name":"TEST","last_name":"TEST","phone":"1234567899"}]'
-      );
+      // let data = this.userForm.value;
+      //  data.users = JSON.parse(
+      //   '[{"first_name":"TEST","last_name":"TEST","phone":"1234567899"}]'
+      // );
       
       this.httpRequest
         .doPostWithoutHeader("users", this.userForm.value)
