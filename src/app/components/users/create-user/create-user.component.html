@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div class="card" style="padding:20px">
+    <div class="card-heading">
+      <h4 class="card-title" style="font-size:18px">
+        {{mode}} User
+        <a routerLink="/users">Users</a>
+      </h4>
+    </div>
+    <div class="card-body">
+      <form name="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" formControlName="first_name" [value]="users.first_name" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" formControlName="last_name" [value]="users.last_name" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Contact</label>
+                <input type="number" min="0" formControlName="phone" [value]="users.phone" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Status</label>
+                <select style="height: auto;" formControlName="status" [value]="users.status" class="form-control">
+                  <option *ngFor="let status of status" [value]="status.option">{{status.value}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" [disabled]="userForm.invalid">Save</button>&nbsp;
+            <a class="btn btn-danger" routerLink="/users">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

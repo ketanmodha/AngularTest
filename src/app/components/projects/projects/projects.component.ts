@@ -13,12 +13,15 @@ export class ProjectsComponent implements OnInit {
   ngOnInit() {
     this.getProjects();
   }
-  getProjects() {
+  
+  getProjects() 
+  {
     this.httpRequest.doGet("projects").subscribe(res => {
       console.log(res);
       this.projects = res;
     });
   }
+
   deleteProject($event) {
     let id = $event.target.id;
     let that = this;
