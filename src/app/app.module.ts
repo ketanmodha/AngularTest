@@ -8,9 +8,10 @@ import { AppComponent } from "./app.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, DashboardComponent],
+  declarations: [AppComponent, PageNotFoundComponent, DashboardComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
