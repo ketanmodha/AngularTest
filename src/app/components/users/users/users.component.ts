@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
   constructor(public httpRequest: HttpRequestService,private router:Router) { }
 
   ngOnInit() {
+    
   	this.usersList();
   }
 

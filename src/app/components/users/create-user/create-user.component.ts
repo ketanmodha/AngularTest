@@ -26,7 +26,7 @@ export class CreateUserComponent implements OnInit {
 		public route: ActivatedRoute,
 		private router: Router) 
 	{
-
+   
 	}
 
 	ngOnInit() 
@@ -44,7 +44,6 @@ export class CreateUserComponent implements OnInit {
 	usersList(id) {
     this.httpRequest.doGet("users/" + id).subscribe((res: any) => {
       this.users.first_name = res.first_name;
-      this.users.last_name = res.last_name;
       this.users.last_name = res.last_name;
       this.users.phone = res.phone;
       this.users.status = res.status;

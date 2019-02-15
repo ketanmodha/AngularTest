@@ -47,7 +47,9 @@ export class ProjectsManageComponent implements OnInit {
     public httpRequest: HttpRequestService,
     public route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+ 
+  }
 
   ngOnInit() {
     let id = this.route.snapshot.params["id"];
