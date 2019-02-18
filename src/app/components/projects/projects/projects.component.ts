@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpRequestService } from "../../../services/http-request.service";
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: "app-projects",
   templateUrl: "./projects.component.html",
@@ -8,7 +8,7 @@ import { HttpRequestService } from "../../../services/http-request.service";
 })
 export class ProjectsComponent implements OnInit {
   public projects: any;
-  constructor(public httpRequest: HttpRequestService) {}
+  constructor(public httpRequest: HttpRequestService,private router: Router) {}
 
   ngOnInit() {
     this.getProjects();

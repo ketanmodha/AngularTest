@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
  public loginForm: FormGroup;
  public user = {
-    name: "",
+    first_name: "",
     password:""
   };
   constructor(public formBuilder: FormBuilder,
@@ -29,19 +29,39 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit( ) {
+    if (localStorage.getItem('isLogin')=='true') {
+      this.router.navigate(['/dashboard']);
+    }
   	this.validator();
   }
 
   loginUser()
   {
-  	 this.validator();	
+  	 let that=this;
+  	  this.httpRequest
+        .doPostWithoutHeader("users/login", this.loginForm.value)
+        .subscribe(
+          (data: any) => {
+          	if (data.message=='fail') 
+          	{
+          		alert('Login Failed');
+          	}
+          	else
+          	{
+          		let logindata = this.loginForm.value;
+          		localStorage.setItem('user',logindata.first_name);
+	  	 		    localStorage.setItem('isLogin','true');
+	            that.router.navigate(["/dashboard"]);
+          	}
+          },
+          (err: any) => {}
+        );
   }
 
   validator()
   {
   	this.loginForm = this.formBuilder.group({
-      name: [this.user.name, Validators.required],
-      password: [this.user.password, Validators.required],
+      first_name: [this.user.first_name, Validators.required],
     });
   }
 
