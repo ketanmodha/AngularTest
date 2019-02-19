@@ -52,6 +52,54 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -63,6 +111,12 @@
           "configurations": {
             "production": {
               "browserTarget": "pms-demo-client:build:production"
+            },
+            "test": {
+              "browserTarget": "pms-demo-client:build:test"
+            },
+            "staging": {
+              "browserTarget": "pms-demo-client:build:staging"
             }
           }
         },
@@ -117,6 +171,12 @@
           "configurations": {
             "production": {
               "devServerTarget": "pms-demo-client:serve:production"
+            },
+            "test": {
+              "devServerTarget": "pms-demo-client:serve:test"
+            },
+            "staging": {
+              "devServerTarget": "pms-demo-client:serve:staging"
             }
           }
         },
