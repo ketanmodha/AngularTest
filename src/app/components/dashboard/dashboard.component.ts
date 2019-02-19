@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpRequestService } from "../../services/http-request.service";
 import {Router, ActivatedRoute, Params,NavigationEnd} from '@angular/router';
+import { CommonFunctions } from 'src/app/common/common-functions';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,7 +10,7 @@ import {Router, ActivatedRoute, Params,NavigationEnd} from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   user:string;
-  constructor(public router:Router) { }
+  constructor(public router:Router,public commonFunctions:CommonFunctions) { }
 
   ngOnInit() {
   	if (localStorage.getItem('isLogin')=='true') 
@@ -22,7 +23,8 @@ export class DashboardComponent implements OnInit {
   {
     localStorage.setItem('user','');
     localStorage.setItem('isLogin','');
-    this.router.navigate(['/']);
+    localStorage.setItem('token','');
+    this.router.navigate([this.commonFunctions.getAccessCodePrefix() + '/']);
   }
 
 }

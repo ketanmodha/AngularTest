@@ -3,7 +3,7 @@ import {
   HttpClient,
   HttpEvent,
   HttpEventType,
-  HttpParams
+  HttpParams 
 } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -29,11 +29,11 @@ export class HttpRequestService {
     this.postHeaders = new HttpHeaders({
       "Content-Type": "application/json",
       AccessToken: localStorage.getItem("token"),
-      AccessCode: localStorage.getItem("code")
+      AccessCode: localStorage.getItem("access_code")
     });
     this.getHeaders = new HttpHeaders({
       AccessToken: localStorage.getItem("token"),
-      AccessCode: localStorage.getItem("code")
+      AccessCode: localStorage.getItem("access_code")
     });
   }
 
