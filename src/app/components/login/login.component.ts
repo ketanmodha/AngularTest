@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
  public loginForm: FormGroup;
  public user = {
     first_name: "",
-    password:""
   };
   constructor(public formBuilder: FormBuilder,
     public httpRequest: HttpRequestService,

@@ -13,6 +13,8 @@ import {
 } from "@angular/material";
 import { UsersComponent } from './users/users.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { RolesComponent } from './roles/roles.component';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     MatCardModule,
     MatInputModule
   ],
-  declarations: [UsersComponent, CreateUserComponent],
+  declarations: [UsersComponent, CreateUserComponent, RolesComponent, PermissionsComponent],
   providers: [
     {
       provide: MATERIAL_SANITY_CHECKS,

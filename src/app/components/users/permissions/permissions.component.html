@@ -1,0 +1,37 @@
+<div class="page-container">
+  <div class="card" style="padding:20px">
+    <div class="card-heading">
+       <a routerLink="/users" style="margin-right: 13px;">Users</a>
+      <h4 class="card-title" style="font-size:18px">
+       Permissions
+      </h4>
+    </div>
+    <div class="card-body">
+     <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Entities</th>
+          <th>View</th>
+          <th>Add</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Import/Export</th>
+          <th>View Settings</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entity of entityData;">
+          <td>Branch</td>
+          <td>{{ entity.name }}</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+     </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="page-container">
+  <div class="card" style="padding:20px">
+    <div class="card-heading">
+       <a routerLink="/users" style="margin-right: 13px;">Users</a>
+      <h4 class="card-title" style="font-size:18px">
+       {{entity}}
+      </h4>
+       <button type="button" class="btn btn-primary" (click)="addRole()" style="float: right;">Add New Role</button>
+    </div>
+    <div class="card-body">
+     <form name="roleForm" [formGroup]="roleForm" (ngSubmit)="onSubmit()" novalidate *ngIf="hideRoles">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Role Name</label>
+                <input type="text" formControlName="name" [value]="role.name" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" [disabled]="roleForm.invalid">Create</button>&nbsp;
+            <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+      </form>
+      <table class="table table-bordered" *ngIf="!hideRoles">
+        <tr>
+          <th>#</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let role of roles; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{role.name}}</td>
+         <td>
+            <a href="javascript:;" (click)="editRole(role)">Edit</a>&nbsp;
+            <a href="javascript:;" (click)="deleteRole($event)" data-id="{{role._id}}">Delete</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

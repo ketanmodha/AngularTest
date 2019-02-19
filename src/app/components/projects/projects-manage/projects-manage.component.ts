@@ -122,7 +122,9 @@ export class ProjectsManageComponent implements OnInit {
           },
           (err: any) => {}
         );
-    } else {
+    } 
+    else 
+    {
       this.httpRequest
         .doPutWithoutHeader("projects/" + id, this.projectForm.value)
         .subscribe(
