@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('user','');
     localStorage.setItem('isLogin','');
     localStorage.setItem('token','');
+    localStorage.setItem('role_id','');
     this.router.navigate([this.commonFunctions.getAccessCodePrefix() + '/']);
   }
 

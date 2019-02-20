@@ -20,7 +20,7 @@ export class CreateUserComponent implements OnInit {
   public userForm: FormGroup;
   mode: string = "Create";
   public users = {
-    accesscode: "",
+    role_id:'',
     first_name: "",
     last_name: "",
     phone: "",
@@ -30,6 +30,7 @@ export class CreateUserComponent implements OnInit {
     { option: 0, value: "Inactive" },
     { option: 1, value: "Active" }
   ];
+  public roles:any;
   constructor(
     public formBuilder: FormBuilder,
     public httpRequest: HttpRequestService,
@@ -41,6 +42,7 @@ export class CreateUserComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.params["id"];
     this.validator();
+    this.rolesList();
     if (id) {
       this.usersList(id);
       this.mode = "Edit";
@@ -52,7 +54,7 @@ export class CreateUserComponent implements OnInit {
   usersList(id) {
     this.httpRequest.doGet("users/" + id).subscribe((res: any) => {
       this.users.first_name = res.first_name;
-      this.users.accesscode = res.accesscode;
+      this.users.role_id = res.role_id;
       this.users.last_name = res.last_name;
       this.users.phone = res.phone;
       this.users.status = res.status;
@@ -62,7 +64,7 @@ export class CreateUserComponent implements OnInit {
 
   validator() {
     this.userForm = this.formBuilder.group({
-      accesscode: [this.users.accesscode, Validators.required],
+      role_id: [this.users.role_id, Validators.required],
       first_name: [this.users.first_name, Validators.required],
       last_name: [this.users.last_name, Validators.required],
       phone: [this.users.phone, Validators.required],
@@ -75,10 +77,7 @@ export class CreateUserComponent implements OnInit {
     let id = this.route.snapshot.params["id"];
     if (!id) {
       console.log(id);
-      // let data = this.userForm.value;
-      //  data.users = JSON.parse(
-      //   '[{"first_name":"TEST","last_name":"TEST","phone":"1234567899"}]'
-      // );
+    
 
       this.httpRequest.doPost("users", this.userForm.value).subscribe(
         (data: any) => {
@@ -98,5 +97,13 @@ export class CreateUserComponent implements OnInit {
         (err: any) => {}
       );
     }
+  }
+
+  rolesList()
+  {
+    this.httpRequest.doGet("roles").subscribe(res => {
+      this.roles = res;
+      console.log(res);
+    });
   }
 }
