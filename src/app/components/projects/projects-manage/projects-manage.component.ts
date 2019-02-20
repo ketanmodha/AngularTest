@@ -9,7 +9,8 @@ import {
 import { HttpRequestService } from "src/app/services/http-request.service";
 import { Route } from "@angular/compiler/src/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { EMAIL_VALIDATOR } from '@angular/forms/src/directives/validators';
+import { EMAIL_VALIDATOR } from "@angular/forms/src/directives/validators";
+import { CommonFunctions } from "src/app/common/common-functions";
 
 @Component({
   selector: "app-projects-manage",
@@ -18,7 +19,7 @@ import { EMAIL_VALIDATOR } from '@angular/forms/src/directives/validators';
 })
 export class ProjectsManageComponent implements OnInit {
   public projectForm: FormGroup;
-  public users:FormArray;
+  public users: FormArray;
   public operationText = "Add";
 
   public statues = [
@@ -46,10 +47,9 @@ export class ProjectsManageComponent implements OnInit {
     public formBuilder: FormBuilder,
     public httpRequest: HttpRequestService,
     public route: ActivatedRoute,
-    private router: Router
-  ) {
- 
-  }
+    private router: Router,
+    public commonFunctions: CommonFunctions
+  ) {}
 
   ngOnInit() {
     let id = this.route.snapshot.params["id"];
@@ -68,7 +68,7 @@ export class ProjectsManageComponent implements OnInit {
     oldUsers.forEach(element => {
       oldUser.push(this.createUser(element));
     });
-    if(oldUsers.length === 0){
+    if (oldUsers.length === 0) {
       oldUser.push(this.createUser({}));
     }
     this.projectForm = this.formBuilder.group({
@@ -76,7 +76,7 @@ export class ProjectsManageComponent implements OnInit {
       description: [this.project.description, Validators.required],
       startDate: [this.project.startDate, Validators.required],
       endDate: [this.project.endDate, Validators.required],
-      status: [this.project.status, Validators.required],
+      status: [this.project.status, Validators.required]
       // users: this.formBuilder.array(oldUser)
       // users: this.formBuilder.array([this.createUser()])
     });
@@ -85,12 +85,12 @@ export class ProjectsManageComponent implements OnInit {
     return this.formBuilder.group({
       name: [user.name, Validators.required],
       type: [user.type, Validators.required],
-      email: [user.email, [Validators.required]],
+      email: [user.email, [Validators.required]]
       // _id: [user._id, []]
     });
   }
   addUser(): void {
-    this.users = this.projectForm.get('users') as FormArray;
+    this.users = this.projectForm.get("users") as FormArray;
     this.users.push(this.createUser({}));
   }
   getProject(id) {
@@ -112,24 +112,26 @@ export class ProjectsManageComponent implements OnInit {
     if (!id) {
       let data = this.projectForm.value;
       data.users = JSON.parse(
-        '[{"name":"name4","type":2,"email":"email@email.com"},{"name":"name4","type":1,"email":"email144@email.com"}]'
+        '[{"first_name":"name4","status":1,"last_name":"ln4"},{"first_name":"name5","status":1,"last_name":"ln5"}]'
       );
       this.httpRequest
         .doPostWithoutHeader("projects", this.projectForm.value)
         .subscribe(
           (data: any) => {
-            that.router.navigate(["/projects"]);
+            that.router.navigate([
+              that.commonFunctions.getAccessCodePrefix() + "/projects"
+            ]);
           },
           (err: any) => {}
         );
-    } 
-    else 
-    {
+    } else {
       this.httpRequest
-        .doPutWithoutHeader("projects/" + id, this.projectForm.value)
+        .doPut("projects/" + id, this.projectForm.value)
         .subscribe(
           (data: any) => {
-            that.router.navigate(["/projects"]);
+            that.router.navigate([
+              that.commonFunctions.getAccessCodePrefix() + "/projects"
+            ]);
           },
           (err: any) => {}
         );

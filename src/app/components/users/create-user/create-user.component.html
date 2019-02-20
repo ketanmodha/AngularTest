@@ -3,7 +3,7 @@
     <div class="card-heading">
       <h4 class="card-title" style="font-size:18px">
         {{mode}} User
-        <a routerLink="/users">Users</a>
+        <div class="card-action" style="float:right;font-size: 15px !important; "><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users">Users</a></div>
       </h4>
     </div>
     <div class="card-body">
@@ -51,7 +51,7 @@
         <div class="row">
           <div class="col-md-6">
             <button class="btn btn-primary" [disabled]="userForm.invalid">Save</button>&nbsp;
-            <a class="btn btn-danger" routerLink="/users">Cancel</a>
+            <a class="btn btn-danger" routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users">Cancel</a>
           </div>
         </div>
       </form>
