@@ -1,37 +1,73 @@
 <div class="page-container">
   <div class="card" style="padding:20px">
     <div class="card-heading">
-       <a routerLink="/users" style="margin-right: 13px;">Users</a>
-      <h4 class="card-title" style="font-size:18px">
+     <a routerLink="/users" style="margin-right: 13px;">Users</a>
+     <h4 class="card-title" style="font-size:18px">
        Permissions
-      </h4>
-    </div>
-    <div class="card-body">
-     <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Entities</th>
-          <th>View</th>
-          <th>Add</th>
-          <th>Edit</th>
-          <th>Delete</th>
-          <th>Import/Export</th>
-          <th>View Settings</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let entity of entityData;">
-          <td>Branch</td>
-          <td>{{ entity.name }}</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-        </tr>
-      </tbody>
-     </table>
+     </h4>
+   </div>
+   <div class="card-body">
+     <div class="panel-group" id="PermissionCollapse" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-col-blue" *ngFor="let roleData of rolesData;">
+        <div class="panel-heading" role="tab">
+          <p class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#PermissionCollapse" href="#role_content_{{roleData._id}}" aria-expanded="false" class="collapsed" (click)="getPermisssions(roleData._id)">
+              <span>{{roleData.name}}</span>
+            </a>
+          </p>
+        </div>
+        <div id="role_content_{{roleData._id}}" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" style="height: 0px;">
+          <div class="panel-body">
+            <div class="body custom-list" style="padding: 0px;">
+              <div class="table-responsive">
+                <table class="table dataTable table-striped,table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Entities</th>
+                      <th>View</th>
+                      <th>Add</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                      <th>Import Export</th>
+                      <th>View Settings</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let entity of entityData;">
+                      <td>{{ entity.name }}</td>
+                      <td>
+                        <input type="checkbox" name="view" id="view_{{ entity.slug }}_{{roleData._id}}" (click)="changePermission('view', entity._id, entity.slug, roleData._id)"/>
+                        <label class="checkbox-label" for="view_{{ entity.slug }}_{{roleData._id}}">&nbsp;</label>
+                      </td>
+                      <td>
+                        <input type="checkbox" name="add" id="add_{{ entity.slug }}_{{roleData._id}}" (click)="changePermission('add', entity._id, entity.slug, roleData._id)"/>
+                        <label class="checkbox-label" for="add_{{ entity.slug }}_{{roleData._id}}">&nbsp;</label>
+                      </td>
+                      <td>
+                        <input type="checkbox" name="edit" id="edit_{{ entity.slug }}_{{roleData._id}}" (click)="changePermission('edit', entity._id, entity.slug, roleData._id)"/>
+                        <label class="checkbox-label" for="edit_{{ entity.slug }}_{{roleData._id}}">&nbsp;</label>
+                      </td>
+                      <td>
+                        <input type="checkbox" name="delete" id="delete_{{ entity.slug }}_{{roleData._id}}" (click)="changePermission('delete', entity._id, entity.slug, roleData._id)"/>
+                        <label class="checkbox-label" for="delete_{{ entity.slug }}_{{roleData._id}}">&nbsp;</label>
+                      </td>
+                      <td>
+                        <input type="checkbox" name="importexport" id="importexport_{{ entity.slug }}_{{roleData._id}}" (click)="changePermission('importexport', entity._id, entity.slug, roleData._id)"/>
+                        <label class="checkbox-label" for="importexport_{{ entity.slug }}_{{roleData._id}}">&nbsp;</label>
+                      </td>
+                       <td>
+                        <input type="checkbox" name="viewsetting" id="viewsetting_{{ entity.slug }}_{{roleData._id}}" (click)="changePermission('viewsetting', entity._id, entity.slug, roleData._id)"/>
+                        <label class="checkbox-label" for="viewsetting_{{ entity.slug }}_{{roleData._id}}">&nbsp;</label>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 </div>
