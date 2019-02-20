@@ -54,7 +54,7 @@ export class RolesComponent implements OnInit {
 		      );
 			this.roleForm.value['slug']=this.roleForm.value['name'].toLowerCase();
 			this.httpRequest
-			.doPostWithoutHeader("roles", this.roleForm.value)
+			.doPost("roles", this.roleForm.value)
 			.subscribe(
 				(data: any) => {
 					if (data.message=='fail') 
@@ -74,7 +74,7 @@ export class RolesComponent implements OnInit {
 		{
 			this.roleForm.value['slug']=this.roleForm.value['name'].toLowerCase();
 			this.httpRequest
-			.doPutWithoutHeader("roles/" +this.role['_id'], this.roleForm.value)
+			.doPut("roles/" +this.role['_id'], this.roleForm.value)
 			.subscribe(
 				(data: any) => {
 					this.hideRoles=false;
@@ -99,7 +99,7 @@ export class RolesComponent implements OnInit {
 	{
 		let id = $event.target.id;
 		let that = this;
-		this.httpRequest.doDeleteWithoutHeader("roles/" + id).subscribe(res => {
+		this.httpRequest.doDelete("roles/" + id).subscribe(res => {
 			that.rolesList();
 		});
 	}
