@@ -114,16 +114,14 @@ export class ProjectsManageComponent implements OnInit {
       data.users = JSON.parse(
         '[{"first_name":"name4","status":1,"last_name":"ln4"},{"first_name":"name5","status":1,"last_name":"ln5"}]'
       );
-      this.httpRequest
-        .doPostWithoutHeader("projects", this.projectForm.value)
-        .subscribe(
-          (data: any) => {
-            that.router.navigate([
-              that.commonFunctions.getAccessCodePrefix() + "/projects"
-            ]);
-          },
-          (err: any) => {}
-        );
+      this.httpRequest.doPost("projects", this.projectForm.value).subscribe(
+        (data: any) => {
+          that.router.navigate([
+            that.commonFunctions.getAccessCodePrefix() + "/projects"
+          ]);
+        },
+        (err: any) => {}
+      );
     } else {
       this.httpRequest
         .doPut("projects/" + id, this.projectForm.value)
