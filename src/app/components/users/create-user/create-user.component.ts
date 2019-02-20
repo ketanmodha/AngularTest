@@ -77,27 +77,23 @@ export class CreateUserComponent implements OnInit {
       //   '[{"first_name":"TEST","last_name":"TEST","phone":"1234567899"}]'
       // );
 
-      this.httpRequest
-        .doPostWithoutHeader("users", this.userForm.value)
-        .subscribe(
-          (data: any) => {
-            that.router.navigate([
-              that.commonFunctions.getAccessCodePrefix() + "/users"
-            ]);
-          },
-          (err: any) => {}
-        );
+      this.httpRequest.doPost("users", this.userForm.value).subscribe(
+        (data: any) => {
+          that.router.navigate([
+            that.commonFunctions.getAccessCodePrefix() + "/users"
+          ]);
+        },
+        (err: any) => {}
+      );
     } else {
-      this.httpRequest
-        .doPutWithoutHeader("users/" + id, this.userForm.value)
-        .subscribe(
-          (data: any) => {
-            that.router.navigate([
-              that.commonFunctions.getAccessCodePrefix() + "/users"
-            ]);
-          },
-          (err: any) => {}
-        );
+      this.httpRequest.doPut("users/" + id, this.userForm.value).subscribe(
+        (data: any) => {
+          that.router.navigate([
+            that.commonFunctions.getAccessCodePrefix() + "/users"
+          ]);
+        },
+        (err: any) => {}
+      );
     }
   }
 }
