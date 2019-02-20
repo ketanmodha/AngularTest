@@ -3,7 +3,7 @@ import {
   HttpClient,
   HttpEvent,
   HttpEventType,
-  HttpParams 
+  HttpParams
 } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -70,8 +70,8 @@ export class HttpRequestService {
   }
 
   doGet(path) {
-    return this.http.get(this.APIEndPoint + path);
-    // return this.http.get(this.APIEndPoint + path, { headers: this.getHeaders });
+    // return this.http.get(this.APIEndPoint + path);
+    return this.http.get(this.APIEndPoint + path, { headers: this.getHeaders });
   }
 
   doDelete(path) {

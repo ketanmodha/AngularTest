@@ -41,7 +41,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("access_code", "superadmin");
         this.loginForm.value.isSuperAdmin = this.isSuperAdmin;
       } else {
-        localStorage.setItem("access_code", this.route.snapshot.params['access_code']);
+        localStorage.setItem(
+          "access_code",
+          this.route.snapshot.params["access_code"]
+        );
       }
       if (event instanceof NavigationEnd) {
         this.isSuperAdmin = event.url.indexOf("superadmin") !== -1;
@@ -58,7 +61,7 @@ export class LoginComponent implements OnInit {
   loginUser() {
     let that = this;
     this.httpRequest
-      .doPost("users/login", this.loginForm.value, {
+      .doPost("login", this.loginForm.value, {
         "Content-Type": "application/json",
         AccessCode: localStorage.getItem("access_code")
       })
