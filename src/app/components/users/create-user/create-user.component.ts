@@ -1,47 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm,FormBuilder,FormGroup,Validators,ReactiveFormsModule,FormArray } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import {
+  NgForm,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormArray
+} from "@angular/forms";
 import { Route } from "@angular/compiler/src/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpRequestService } from "src/app/services/http-request.service";
+import { CommonFunctions } from "src/app/common/common-functions";
 @Component({
-	selector: 'app-create-user',
-	templateUrl: './create-user.component.html',
-	styleUrls: ['./create-user.component.css']
+  selector: "app-create-user",
+  templateUrl: "./create-user.component.html",
+  styleUrls: ["./create-user.component.css"]
 })
 export class CreateUserComponent implements OnInit {
-	public userForm: FormGroup;
-	mode:string='Create';
-	public users = {
-		first_name: "",
-		last_name: "",
-		phone: "",
-		status: 1,
-	};
-	public status = [
-	{ option: 0, value: "Inactive" },
-	{ option: 1, value: "Active" },
-	];
-	constructor( public formBuilder: FormBuilder,
-		public httpRequest: HttpRequestService,
-		public route: ActivatedRoute,
-		private router: Router) 
-	{
-   
-	}
+  public userForm: FormGroup;
+  mode: string = "Create";
+  public users = {
+    first_name: "",
+    last_name: "",
+    phone: "",
+    status: 1
+  };
+  public status = [
+    { option: 0, value: "Inactive" },
+    { option: 1, value: "Active" }
+  ];
+  constructor(
+    public formBuilder: FormBuilder,
+    public httpRequest: HttpRequestService,
+    public route: ActivatedRoute,
+    private router: Router,
+    public commonFunctions: CommonFunctions
+  ) {}
 
-	ngOnInit() 
-	{
-		let id = this.route.snapshot.params["id"];
-		this.validator();
-		if (id) {
-			this.usersList(id);
-			this.mode = "Edit";
-		} else {
-			this.mode = "Create";
-		}
-	}
+  ngOnInit() {
+    let id = this.route.snapshot.params["id"];
+    this.validator();
+    if (id) {
+      this.usersList(id);
+      this.mode = "Edit";
+    } else {
+      this.mode = "Create";
+    }
+  }
 
-	usersList(id) {
+  usersList(id) {
     this.httpRequest.doGet("users/" + id).subscribe((res: any) => {
       this.users.first_name = res.first_name;
       this.users.last_name = res.last_name;
@@ -56,11 +63,11 @@ export class CreateUserComponent implements OnInit {
       first_name: [this.users.first_name, Validators.required],
       last_name: [this.users.last_name, Validators.required],
       phone: [this.users.phone, Validators.required],
-      status: [this.users.status, Validators.required],
+      status: [this.users.status, Validators.required]
     });
   }
 
-   onSubmit() {
+  onSubmit() {
     let that = this;
     let id = this.route.snapshot.params["id"];
     if (!id) {
@@ -69,12 +76,14 @@ export class CreateUserComponent implements OnInit {
       //  data.users = JSON.parse(
       //   '[{"first_name":"TEST","last_name":"TEST","phone":"1234567899"}]'
       // );
-      
+
       this.httpRequest
         .doPostWithoutHeader("users", this.userForm.value)
         .subscribe(
           (data: any) => {
-            that.router.navigate(["/users"]);
+            that.router.navigate([
+              that.commonFunctions.getAccessCodePrefix() + "/users"
+            ]);
           },
           (err: any) => {}
         );
@@ -83,11 +92,12 @@ export class CreateUserComponent implements OnInit {
         .doPutWithoutHeader("users/" + id, this.userForm.value)
         .subscribe(
           (data: any) => {
-            that.router.navigate(["/users"]);
+            that.router.navigate([
+              that.commonFunctions.getAccessCodePrefix() + "/users"
+            ]);
           },
           (err: any) => {}
         );
     }
   }
-  
 }

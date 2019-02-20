@@ -1,41 +1,43 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpRequestService } from "../../../services/http-request.service";
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { CommonFunctions } from "src/app/common/common-functions";
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: "app-users",
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.css"]
 })
 export class UsersComponent implements OnInit {
+  public users: any;
 
-	public users: any;
-
-  constructor(public httpRequest: HttpRequestService,private router:Router) { }
+  constructor(
+    public httpRequest: HttpRequestService,
+    private router: Router,
+    public commonFunctions: CommonFunctions
+  ) {}
 
   ngOnInit() {
-    
-  	this.usersList();
+    this.usersList();
   }
 
-   usersList() 
-  {
+  usersList() {
     this.httpRequest.doGet("users").subscribe(res => {
       this.users = res;
     });
     console.log(this.users);
   }
 
-   deleteUser($event) 
-   {
+  deleteUser($event) {
     let id = $event.target.id;
     let that = this;
-    this.httpRequest.doDeleteWithoutHeader("users/" + id).subscribe(res => {
+    this.httpRequest.doDelete("users/" + id).subscribe(res => {
       that.usersList();
     });
   }
 
-  addUser()
-  {
-  	this.router.navigate(['/users/create']);
+  addUser() {
+    this.router.navigate([
+      this.commonFunctions.getAccessCodePrefix() + "/users/create"
+    ]);
   }
 }

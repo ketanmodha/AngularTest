@@ -29,11 +29,11 @@ export class HttpRequestService {
     this.postHeaders = new HttpHeaders({
       "Content-Type": "application/json",
       AccessToken: localStorage.getItem("token"),
-      AccessCode: localStorage.getItem("code")
+      AccessCode: localStorage.getItem("access_code")
     });
     this.getHeaders = new HttpHeaders({
       AccessToken: localStorage.getItem("token"),
-      AccessCode: localStorage.getItem("code")
+      AccessCode: localStorage.getItem("access_code")
     });
   }
 
@@ -70,8 +70,8 @@ export class HttpRequestService {
   }
 
   doGet(path) {
-    return this.http.get(this.APIEndPoint + path);
-    // return this.http.get(this.APIEndPoint + path, { headers: this.getHeaders });
+    // return this.http.get(this.APIEndPoint + path);
+    return this.http.get(this.APIEndPoint + path, { headers: this.getHeaders });
   }
 
   doDelete(path) {

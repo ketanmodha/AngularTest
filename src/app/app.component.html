@@ -1,7 +1,15 @@
-<header  *ngIf="isLogin==true" class="navbar navbar-inner navbar-fixed-top">
+<header *ngIf="isLogin" class="navbar navbar-inner navbar-fixed-top">
   <nav class="container">
     <div class="navbar-header">
-
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/dashboard">Dashboard</a></li>
+          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/projects">Projects</a></li>
+          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users">Users</a></li>
+          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/roles">Roles</a></li>
+          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/permissions">Permissions</a></li>
+        </ol>
+      </nav>
     </div>
   </nav>
 </header>
@@ -9,4 +17,3 @@
 <main class="container">
   <router-outlet></router-outlet>
 </main>
-

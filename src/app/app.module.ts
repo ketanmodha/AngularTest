@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
+import { CommonFunctions } from './common/common-functions';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, DashboardComponent, LoginComponent],
@@ -20,7 +21,7 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CommonFunctions],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,11 +1,11 @@
- <div class="page-container">
+<div class="page-container">
   <div class="card" style="padding:20px;padding-top: 40px;">
     <div class="card-heading">
       <h4 class="card-title" style="font-size:18px">
-        <a routerLink="/dashboard" style="margin-right: 13px;">Dashboard</a>
+        <!-- <a routerLink="/dashboard" style="margin-right: 13px;">Dashboard</a>
        <a routerLink="/projects" style="margin-right: 13px;">Projects</a>
        <a routerLink="roles" style="margin-right: 13px;">Roles</a>
-       <a routerLink="permissions">Permissions</a>
+       <a routerLink="permissions">Permissions</a> -->
         <button type="button" class="btn btn-primary" (click)="addUser()" style="float: right;">New User</button>
       </h4>
 
@@ -13,19 +13,19 @@
     <div class="card-body">
       <table class="table table-bordered">
         <tr>
-        	<th>#</th>
+          <th>#</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Contact</th>
           <th>Action</th>
         </tr>
         <tr *ngFor="let user of users; let i = index">
-        	<td>{{i+1}}</td>
-         <td>{{user.first_name}}</td>
-         <td>{{user.last_name}}</td>
-         <td>{{user.phone}}</td>
-         <td>
-            <a routerLink="/users/create/{{user._id}}">Edit</a>&nbsp;
+          <td>{{i+1}}</td>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.phone}}</td>
+          <td>
+            <a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/create/{{user._id}}">Edit</a>&nbsp;
             <a href="javascript:;" (click)="deleteUser($event)" data-id="{{user._id}}">Delete</a>
           </td>
         </tr>
