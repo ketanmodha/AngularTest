@@ -2,9 +2,12 @@
   <div class="card" style="padding:20px;padding-top: 40px;">
     <div class="card-heading">
       <h4 class="card-title" style="font-size:18px">
-       <a routerLink="/dashboard" style="margin-right: 13px;">Dashboard</a>
-       <a routerLink="/users" style="margin-right: 13px;">Users</a>
-        <div class="card-action" style="float:right;font-size: 15px;"><a routerLink="/projects/create">Add Project</a></div>
+        Projects
+        <!-- <a routerLink="/dashboard" style="margin-right: 13px;">Dashboard</a>
+        <a routerLink="/users" style="margin-right: 13px;">Users</a> -->
+        <div class="card-action" style="float:right;font-size: 15px;">
+          <a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/projects/create">Add Project</a>
+        </div>
       </h4>
 
     </div>
@@ -27,7 +30,7 @@
           <td>{{(project.endDate)|date:"mediumDate"}}</td>
           <td>{{project.status}}</td>
           <td>
-            <a routerLink="/projects/create/{{project._id}}">Edit</a>&nbsp;
+            <a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/projects/create/{{project._id}}">Edit</a>&nbsp;
             <a href="javascript:;" (click)="deleteProject($event)" data-id="{{project._id}}">Delete</a>
           </td>
         </tr>

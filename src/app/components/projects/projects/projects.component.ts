@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpRequestService } from "../../../services/http-request.service";
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { CommonFunctions } from "src/app/common/common-functions";
 @Component({
   selector: "app-projects",
   templateUrl: "./projects.component.html",
@@ -8,16 +9,18 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class ProjectsComponent implements OnInit {
   public projects: any;
-  constructor(public httpRequest: HttpRequestService,private router: Router) {}
+  constructor(
+    public httpRequest: HttpRequestService,
+    private router: Router,
+    public commonFunctions: CommonFunctions
+  ) {}
 
   ngOnInit() {
     this.getProjects();
   }
-  
-  getProjects() 
-  {
+
+  getProjects() {
     this.httpRequest.doGet("projects").subscribe(res => {
-      console.log(res);
       this.projects = res;
     });
   }
@@ -25,7 +28,7 @@ export class ProjectsComponent implements OnInit {
   deleteProject($event) {
     let id = $event.target.id;
     let that = this;
-    this.httpRequest.doDeleteWithoutHeader("projects/" + id).subscribe(res => {
+    this.httpRequest.doDelete("projects/" + id).subscribe(res => {
       console.log(res);
       that.getProjects();
     });

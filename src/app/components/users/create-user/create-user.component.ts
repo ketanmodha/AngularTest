@@ -20,6 +20,7 @@ export class CreateUserComponent implements OnInit {
   public userForm: FormGroup;
   mode: string = "Create";
   public users = {
+    accesscode: "",
     first_name: "",
     last_name: "",
     phone: "",
@@ -51,6 +52,7 @@ export class CreateUserComponent implements OnInit {
   usersList(id) {
     this.httpRequest.doGet("users/" + id).subscribe((res: any) => {
       this.users.first_name = res.first_name;
+      this.users.accesscode = res.accesscode;
       this.users.last_name = res.last_name;
       this.users.phone = res.phone;
       this.users.status = res.status;
@@ -60,6 +62,7 @@ export class CreateUserComponent implements OnInit {
 
   validator() {
     this.userForm = this.formBuilder.group({
+      accesscode: [this.users.accesscode, Validators.required],
       first_name: [this.users.first_name, Validators.required],
       last_name: [this.users.last_name, Validators.required],
       phone: [this.users.phone, Validators.required],
@@ -77,27 +80,23 @@ export class CreateUserComponent implements OnInit {
       //   '[{"first_name":"TEST","last_name":"TEST","phone":"1234567899"}]'
       // );
 
-      this.httpRequest
-        .doPostWithoutHeader("users", this.userForm.value)
-        .subscribe(
-          (data: any) => {
-            that.router.navigate([
-              that.commonFunctions.getAccessCodePrefix() + "/users"
-            ]);
-          },
-          (err: any) => {}
-        );
+      this.httpRequest.doPost("users", this.userForm.value).subscribe(
+        (data: any) => {
+          that.router.navigate([
+            that.commonFunctions.getAccessCodePrefix() + "/users"
+          ]);
+        },
+        (err: any) => {}
+      );
     } else {
-      this.httpRequest
-        .doPutWithoutHeader("users/" + id, this.userForm.value)
-        .subscribe(
-          (data: any) => {
-            that.router.navigate([
-              that.commonFunctions.getAccessCodePrefix() + "/users"
-            ]);
-          },
-          (err: any) => {}
-        );
+      this.httpRequest.doPut("users/" + id, this.userForm.value).subscribe(
+        (data: any) => {
+          that.router.navigate([
+            that.commonFunctions.getAccessCodePrefix() + "/users"
+          ]);
+        },
+        (err: any) => {}
+      );
     }
   }
 }
