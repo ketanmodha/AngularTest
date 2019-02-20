@@ -64,7 +64,7 @@ export class PermissionsComponent implements OnInit {
     let data = {};
     data[permission + '_data'] = isChecked;
        this.httpRequest
-        .doPostWithoutHeader("permissions",{'data': data, 'role_id': roleId, 'entity_id': entityId})
+        .doPost("permissions",{'data': data, 'role_id': roleId, 'entity_id': entityId})
         .subscribe(
           (data: any) => {
             console.log('Permission Added.')
