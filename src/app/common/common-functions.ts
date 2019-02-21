@@ -17,4 +17,9 @@ export class CommonFunctions {
       // return access_code;
     }
   }
+
+  checkAccess(entity,access,baipass)
+  {
+
+  }
 }
