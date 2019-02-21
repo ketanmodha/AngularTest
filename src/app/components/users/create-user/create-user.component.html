@@ -12,9 +12,10 @@
           <div class="col-md-6">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Access Code</label>
-                <input type="text" formControlName="accesscode" [value]="users.accesscode" class="form-control"
-                  [pattern]="'^[a-zA-Z0-9 \'\-]+$'" maxlength="6" placeholder="Unique access code of 6 digit">
+                <label>Role</label>
+                <select style="height: auto;" formControlName="role_id" [value]="users.role_id" class="form-control">
+                  <option *ngFor="let role of roles" [value]="role._id">{{role.name}}</option>
+                </select>
               </div>
             </div>
             <div class="col-md-12">

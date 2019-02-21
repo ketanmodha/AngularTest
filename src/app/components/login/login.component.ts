@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+
     let that = this;
     this.httpRequest
       .doPost("login", this.loginForm.value, {
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("user", logindata.first_name);
             localStorage.setItem("token", localStorage.getItem("access_code"));
             localStorage.setItem("isLogin", "true");
+            localStorage.setItem("role_id", data.user.role_id);
             that.router.navigate([
               that.commonFunctions.getAccessCodePrefix() + "/dashboard"
             ]);
