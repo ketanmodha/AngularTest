@@ -20,7 +20,7 @@ import { CommonFunctions } from "./common/common-functions";
 export class AppComponent {
   public isLogin: boolean = false;
   title = "pms-demo-client";
-
+  public roleId=localStorage.getItem('role_id');
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -41,5 +41,7 @@ export class AppComponent {
       }
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.commonFunctions.getAllPermissions(this.roleId);
+  }
 }
