@@ -9,7 +9,8 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./components/login/login.component";
 import { AccessCodeGuard } from "./guards/access-code.guard";
-
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { RouteGuardService } from './services/route-guard.service';
 const routes: Routes = [
   {
     path:"superadmin",
@@ -24,11 +25,20 @@ const routes: Routes = [
       },  
       {
         path: "projects",
-        loadChildren: "./components/projects/projects.module#ProjectsModule"
+        loadChildren: "./components/projects/projects.module#ProjectsModule",
       },
       {
         path: "users",
-        loadChildren: "./components/users/users.module#UsersModule"
+        loadChildren: "./components/users/users.module#UsersModule",
+      },
+      { path: "**", redirectTo: "page-not-found" },
+      {
+        path: "page-not-found",
+        component: PageNotFoundComponent
+      },
+      {
+        path:'unauthorized',
+        component:UnauthorizedComponent
       },
     ]
   },
@@ -40,14 +50,26 @@ const routes: Routes = [
       { path: "", component: LoginComponent },
       { path: "login", component: LoginComponent },
       { path: "dashboard",component: DashboardComponent },  
-      { path: "projects", loadChildren: "./components/projects/projects.module#ProjectsModule" },
-      { path: "users", loadChildren: "./components/users/users.module#UsersModule" },
-      { path: "**", redirectTo: "page-not-found" }
+      { path: "projects", loadChildren: "./components/projects/projects.module#ProjectsModule",canActivate: [RouteGuardService], },
+      { path: "users", loadChildren: "./components/users/users.module#UsersModule",canActivate: [RouteGuardService],},
+      { path: "**", redirectTo: "page-not-found" },
+      {
+        path: "page-not-found",
+        component: PageNotFoundComponent
+      },
+      {
+        path:'unauthorized',
+        component:UnauthorizedComponent
+      },
     ]
   },
   {
     path: "page-not-found",
     component: PageNotFoundComponent
+  },
+  {
+    path:'unauthorized',
+    component:UnauthorizedComponent
   },
   { path: "**", redirectTo: "page-not-found" }
 ];
