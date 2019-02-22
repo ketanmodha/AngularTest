@@ -51,7 +51,8 @@ export class CommonFunctions {
       }
       
       _.forEach(this.permissions, function(value) {
-        if ( value.slug == entity ) {
+        if ( value['entity_id']['slug'] == entity ) {
+          console.log(value['entity_id']['slug'],entity);
           if ( value[access+'_data'] ) {
             that.accessReturn = true;
           }

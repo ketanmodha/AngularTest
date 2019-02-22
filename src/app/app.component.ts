@@ -21,6 +21,7 @@ export class AppComponent {
   public isLogin: boolean = false;
   title = "pms-demo-client";
   public roleId=localStorage.getItem('role_id');
+  public role=localStorage.getItem('role');
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -42,6 +43,7 @@ export class AppComponent {
     });
   }
   ngOnInit() {
+    this.commonFunctions.checkAccess('projects', 'view','');
     this.commonFunctions.getAllPermissions(this.roleId);
   }
 }
