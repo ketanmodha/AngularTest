@@ -7,6 +7,7 @@ import * as _ from "lodash";
 export class CommonFunctions {
   permissions = [];
   accessReturn:boolean = false;
+  role=localStorage.getItem('role');
   constructor(public httpRequest: HttpRequestService) {}
 
   getLocalStorage(storage_key) {
@@ -25,42 +26,48 @@ export class CommonFunctions {
 
   checkAccess(entity,access,baipass)
   {
-    let checkMore = true;
-    if ( baipass != undefined && Object.keys(baipass).length > 0 ) {
-
-      let checkAcc = false;
-      _.forEach(baipass, function(value) {
-        if ( value == localStorage.getItem('role') ) {
-          checkAcc = true;
-        }
-      });
-
-      if ( !checkAcc ) {
-        checkMore =  true;
-      } else {
-        checkMore =  false;
-      }
-    }
-
-    if ( checkMore ) {
-      this.accessReturn = false;
-      let that = this;
-
-      if ( localStorage.getItem('permissions') != 'undefined' ) {
-        this.permissions = JSON.parse(localStorage.getItem('permissions')); 
-      }
-      
-      _.forEach(this.permissions, function(value) {
-        if ( value['entity_id']['slug'] == entity ) {
-          console.log(value['entity_id']['slug'],entity);
-          if ( value[access+'_data'] ) {
-            that.accessReturn = true;
-          }
-        }
-      });
-      return this.accessReturn;
-    } else {
+    if (this.role=='superadmin') 
+    {
       return true;
+    }
+    else
+    {
+      let checkMore = true;
+      let checkAcc = false;
+      if ( baipass != undefined && Object.keys(baipass).length > 0 ) {
+        _.forEach(baipass, function(value) {
+          if ( value == localStorage.getItem('role') ) {
+            checkAcc = true;
+          }
+        });
+
+        if (checkAcc==false) {
+          checkMore =  true;
+        } else {
+          checkMore =  false;
+        }
+      }
+
+      if ( checkMore ) {
+        this.accessReturn = false;
+        let that = this;
+
+        if ( localStorage.getItem('permissions') != 'undefined' ) {
+          this.permissions = JSON.parse(localStorage.getItem('permissions')); 
+        }
+
+        _.forEach(this.permissions, function(value) {
+          if ( value.entity_id[0]['slug'] == entity ) {
+            if ( value[access+'_data'] ) {
+              that.accessReturn = true;
+            }
+          }
+        });
+        console.log(this.accessReturn);
+        return this.accessReturn;
+      } else {
+        return true;
+      }
     }
   }
 

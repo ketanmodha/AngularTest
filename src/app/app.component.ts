@@ -28,7 +28,6 @@ export class AppComponent {
     public commonFunctions: CommonFunctions
   ) {
     let that = this;
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (
@@ -43,7 +42,6 @@ export class AppComponent {
     });
   }
   ngOnInit() {
-    this.commonFunctions.checkAccess('projects', 'view','');
     this.commonFunctions.getAllPermissions(this.roleId);
   }
 }

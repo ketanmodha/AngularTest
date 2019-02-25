@@ -10,9 +10,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { CommonFunctions } from './common/common-functions';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, DashboardComponent, LoginComponent],
+  declarations: [AppComponent, PageNotFoundComponent, DashboardComponent, LoginComponent, UnauthorizedComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

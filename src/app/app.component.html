@@ -4,10 +4,10 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/dashboard">Dashboard</a></li>
-          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/projects">Projects</a></li>
-          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users">Users</a></li>
-          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/roles">Roles</a></li>
-          <li class="breadcrumb-item"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/permissions">Permissions</a></li>
+          <li class="breadcrumb-item"  *ngIf="commonFunctions.checkAccess('projects', 'view','')"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/projects">Projects</a></li>
+          <li class="breadcrumb-item" *ngIf="commonFunctions.checkAccess('users', 'view','')"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users">Users</a></li>
+          <li class="breadcrumb-item" *ngIf="commonFunctions.checkAccess('roles', 'view','')"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/roles">Roles</a></li>
+          <li class="breadcrumb-item" *ngIf="commonFunctions.checkAccess('permissions', 'view','')"><a routerLink="/{{commonFunctions.getAccessCodePrefix()}}/users/permissions">Permissions</a></li>
         </ol>
       </nav>
     </div>

@@ -11,17 +11,18 @@ import { Route } from "@angular/compiler/src/core";
 import { ActivatedRoute, Router } from "@angular/router";
 declare var $:any;
 import * as _ from "lodash";
+import { CommonFunctions } from "./../../../common/common-functions";
 @Component({
   selector: 'app-permissions',
   templateUrl: './permissions.component.html',
   styleUrls: ['./permissions.component.css']
 })
 export class PermissionsComponent implements OnInit {
-
-  constructor(public httpRequest: HttpRequestService,private router:Router) { }
+  public roleId=localStorage.getItem('role_id');
   rolesData:any;
   entityData:any;
   permissions:any;
+  constructor(public httpRequest: HttpRequestService,private router:Router,public commonFunctions: CommonFunctions) { }
   ngOnInit() 
   {
   	this.entityList();
@@ -67,7 +68,8 @@ export class PermissionsComponent implements OnInit {
         .doPost("permissions",{'data': data, 'role_id': roleId, 'entity_id': entityId})
         .subscribe(
           (data: any) => {
-            console.log('Permission Added.')
+            console.log('Permission Added.');
+            this.commonFunctions.getAllPermissions(this.roleId);
           },
           (err: any) => {}
         );
