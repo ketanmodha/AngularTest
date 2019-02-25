@@ -9,7 +9,7 @@ import { CommonFunctions } from "src/app/common/common-functions";
 })
 export class UsersComponent implements OnInit {
   public users: any;
-
+  public role=localStorage.getItem('role');
   constructor(
     public httpRequest: HttpRequestService,
     private router: Router,

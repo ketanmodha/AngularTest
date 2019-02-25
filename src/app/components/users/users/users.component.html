@@ -14,6 +14,7 @@
       <table class="table table-bordered">
         <tr>
           <th>#</th>
+          <th *ngIf="role=='superadmin'">Access Code</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Contact</th>
@@ -21,6 +22,7 @@
         </tr>
         <tr *ngFor="let user of users; let i = index">
           <td>{{i+1}}</td>
+          <td *ngIf="role=='superadmin'">{{user.accesscode}}</td>
           <td>{{user.first_name}}</td>
           <td>{{user.last_name}}</td>
           <td>{{user.phone}}</td>

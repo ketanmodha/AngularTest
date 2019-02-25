@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsManageComponent } from './projects-manage/projects-manage.component';
-
+import { RouteGuardService } from './../../services/route-guard.service';
 
 const routes: Routes = [
   {
@@ -11,11 +11,17 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: ProjectsManageComponent
+    component: ProjectsManageComponent,
+    canActivate: [RouteGuardService],
+    data: { baiPass: ['admin','superadmin'],
+    permissions: { projects: ['create'] } }
   },
   {
     path: 'create/:id',
-    component: ProjectsManageComponent
+    component: ProjectsManageComponent,
+    canActivate: [RouteGuardService],
+    data: { baiPass: ['admin','superadmin'],
+    permissions: { projects: ['edit'] } }
   }
 ];
 

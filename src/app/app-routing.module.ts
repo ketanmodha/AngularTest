@@ -26,12 +26,15 @@ const routes: Routes = [
       {
         path: "projects",
         loadChildren: "./components/projects/projects.module#ProjectsModule",
+        canActivate: [RouteGuardService],
+        data: { roles: ['superadmin'] }
       },
       {
         path: "users",
         loadChildren: "./components/users/users.module#UsersModule",
+        canActivate: [RouteGuardService],
+        data: { roles: ['superadmin'] }
       },
-      { path: "**", redirectTo: "page-not-found" },
       {
         path: "page-not-found",
         component: PageNotFoundComponent
@@ -40,6 +43,7 @@ const routes: Routes = [
         path:'unauthorized',
         component:UnauthorizedComponent
       },
+      { path: "**", redirectTo: "page-not-found" },
     ]
   },
   {
@@ -50,9 +54,8 @@ const routes: Routes = [
       { path: "", component: LoginComponent },
       { path: "login", component: LoginComponent },
       { path: "dashboard",component: DashboardComponent },  
-      { path: "projects", loadChildren: "./components/projects/projects.module#ProjectsModule",canActivate: [RouteGuardService], },
-      { path: "users", loadChildren: "./components/users/users.module#UsersModule",canActivate: [RouteGuardService],},
-      { path: "**", redirectTo: "page-not-found" },
+      { path: "projects", loadChildren: "./components/projects/projects.module#ProjectsModule",canActivate: [RouteGuardService],data: { baiPass: ['admin'], permissions: { projects: ['view'] } }},
+      { path: "users",loadChildren: "./components/users/users.module#UsersModule",canActivate: [RouteGuardService],data: { baiPass: ['admin'], permissions: { users: ['view'] } }},
       {
         path: "page-not-found",
         component: PageNotFoundComponent
@@ -61,6 +64,7 @@ const routes: Routes = [
         path:'unauthorized',
         component:UnauthorizedComponent
       },
+      { path: "**", redirectTo: "page-not-found" },
     ]
   },
   {

@@ -52,7 +52,7 @@ export class CommonFunctions {
         this.accessReturn = false;
         let that = this;
 
-        if ( localStorage.getItem('permissions') != 'undefined' ) {
+        if ( localStorage.getItem('permissions') != 'undefined' &&localStorage.getItem('permissions') != '') {
           this.permissions = JSON.parse(localStorage.getItem('permissions')); 
         }
 
@@ -63,7 +63,6 @@ export class CommonFunctions {
             }
           }
         });
-        console.log(this.accessReturn);
         return this.accessReturn;
       } else {
         return true;

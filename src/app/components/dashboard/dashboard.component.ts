@@ -13,7 +13,8 @@ export class DashboardComponent implements OnInit {
   constructor(public router:Router,public commonFunctions:CommonFunctions) { }
   roleId=localStorage.getItem('role_id');
  
-  ngOnInit() {
+  ngOnInit() 
+  {
   	if (localStorage.getItem('isLogin')=='true') 
     {  
       this.user=localStorage.getItem('user');
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('token','');
     localStorage.setItem('role_id','');
     localStorage.setItem('role','');
+    localStorage.setItem('permissions','');
     this.router.navigate([this.commonFunctions.getAccessCodePrefix() + '/']);
   }
 
