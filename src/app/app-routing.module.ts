@@ -54,7 +54,7 @@ const routes: Routes = [
       { path: "", component: LoginComponent },
       { path: "login", component: LoginComponent },
       { path: "dashboard",component: DashboardComponent },  
-      { path: "projects", loadChildren: "./components/projects/projects.module#ProjectsModule",canActivate: [RouteGuardService],data: { baiPass: ['admin'], permissions: { projects: ['view'] } }},
+      { path: "projects", loadChildren: "./components/projects/projects.module#ProjectsModule",canActivate: [RouteGuardService],data: {permissions: { projects: ['view'] } }},
       { path: "users",loadChildren: "./components/users/users.module#UsersModule",canActivate: [RouteGuardService],data: { baiPass: ['admin'], permissions: { users: ['view'] } }},
       {
         path: "page-not-found",

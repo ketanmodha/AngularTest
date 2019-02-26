@@ -31,5 +31,4 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('permissions','');
     this.router.navigate([this.commonFunctions.getAccessCodePrefix() + '/']);
   }
-
 }
